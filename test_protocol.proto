@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+/*
+    Small (64-byte) entity for testing.
+    
+    Serialized size = 64 bytes
+
+    NOTE: padding needs to be filled with 40 bytes to ensure
+    correct entity size.
+*/
+message EntitySmall {
+    fixed32 id = 1; // 4 bytes + 1 byte tag
+    bytes timestamp = 2; // 15 bytes timestamp + 1 byte len + 1 byte tag
+    bytes padding = 3; // 40 byte padding + 1 byte len +  1 byte tag
+}
+
+/*
+    Large (512-byte) entity for testing.
+
+    Serialized size = 512 bytes
+
+    NOTE: padding needs to be filled with 487 bytes to ensure
+    correct entity size.
+*/
+message EntityLarge {
+    fixed32 id = 1; // 4 bytes id + 1 byte tag
+    bytes timestamp = 2; // 15 bytes timestamp + 1 byte len + 1 byte tag
+    bytes padding = 3; // 487 bytes padding + 2 byte len + 1 byte tag
+}
+
+/*
+    Set with small (64-byte) entities for single-topic testing. Timestamp can be placed
+    in any of the entities.
+
+    Serialized sizes:
+        1 entity:       66 bytes
+        10 entities:    660 bytes
+        100 entities:   6600 bytes
+        500 entities:   33000 bytes
+        1000 entities:  66000 bytes
+*/
+message EntitySetSmall {
+    repeated EntitySmall entities = 1; // entities * 64 bytes + entities * 1 byte len + entities * 1 byte tag
+}
+
+/*
+    Set with large (512-byte) entities for single-topic testing. Timestamp can be placed
+    in any of the entities.
+
+    Serialized sizes:
+        1 entity:       515 bytes
+        10 entities:    5150 bytes
+        100 entities:   51500 bytes
+        500 entities:   257500 bytes
+        1000 entities:  515000 bytes
+*/
+message EntitySetLarge {
+    repeated EntityLarge entities = 1; // entities * 512 bytes + entities * 2 byte len + entities * 1 byte tag
+}
