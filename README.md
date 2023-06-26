@@ -21,4 +21,4 @@ ALWAYS restart the middleware.py as it cache data. Otherwise the test will be co
 # In relation to the study
 * Mean latency in the related study is the same as average latency in this code
 * The results shown in the related study can be found in this git repo under the *results* folder
-* The related study can be found here: 
+* The related study can be found here: http://urn.kb.se/resolve?urn=urn:nbn:se:liu:diva-195480
